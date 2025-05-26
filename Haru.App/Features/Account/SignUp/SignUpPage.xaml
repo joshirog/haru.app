@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Haru.App.Features.Account.SignUp.SignUpPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+            <Label Text="SignUp" FontSize="32" HorizontalOptions="Center" />
+
+            <Entry Placeholder="Email" Keyboard="Email" Text="{Binding Email}" />
+            <Entry Placeholder="Phone" Text="{Binding Phone}" />
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
+            <Entry Placeholder="ConfirmPassword" IsPassword="True" Text="{Binding ConfirmPassword}" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+
+            <Button Text="SignUp" Command="{Binding SignUpCommand}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

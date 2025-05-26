@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{25043459-14CA-489F-97EC-6BF7BB7BDB69}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Haru.App PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.EDA8E1CC-31BA-489D-88D8-99C3530A1563" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.EDA8E1CC-31BA-489D-88D8-99C3530A1563" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Haru" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

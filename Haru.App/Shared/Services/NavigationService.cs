@@ -10,5 +10,5 @@ public class NavigationService : INavigationService
 
     public Task GoToAsync(string route, IDictionary<string, object> parameters) => Shell.Current.GoToAsync(route, parameters);
     
-    public Task GoBackAsync() => Shell.Current.GoBackAsync();
+    public Task GoBackAsync() => Shell.Current.GoToAsync("..");
 }

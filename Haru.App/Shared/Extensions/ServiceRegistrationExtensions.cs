@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Haru.App.Features.Account.SignIn;
+using Haru.App.Features.Account.SignUp;
 using Haru.App.Features.Splash;
+using Haru.App.Shared.Services;
 
 namespace Haru.App.Shared.Extensions;
 
@@ -12,9 +14,12 @@ public static class ServiceRegistrationExtensions
         var baseUrl = configuration["ApiSettings:BaseUrl"];
         
         builder.Services.AddSingleton<SplashViewModel>();
-        builder.Services.AddSingleton<SignInViewModel>();
+        builder.Services.AddTransient<SignInViewModel>();
+        builder.Services.AddTransient<SignUpViewModel>();
+        builder.Services.AddSingleton<IDialogService, DialogService>();
+        builder.Services.AddSingleton<INavigationService, NavigationService>();
         
-        builder.Services.AddHttpClient<SignInService>(client =>
+        builder.Services.AddHttpClient<ISignInService, SignInService>(client =>
         {
             client.BaseAddress = new Uri(baseUrl);
         });

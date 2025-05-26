@@ -1,15 +1,29 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Haru.App.Shared.Services;
+using Haru.App.Shared.ViewModels;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Diagnostics;
 
 namespace Haru.App.Features.Account.SignIn;
 
-public partial class SignInViewModel : ObservableObject
+public partial class SignInViewModel : BaseViewModel
 {
-    private readonly SignInService _signInService;
+    private readonly ISignInService _signInService;
+    private readonly IDialogService _dialogService;
+    private readonly ILogger<SignInViewModel> _logger;
+    private readonly INavigationService _navigationService;
 
-    public SignInViewModel(SignInService signInService)
+    public SignInViewModel(
+        ISignInService signInService, 
+        IDialogService dialogService, 
+        ILogger<SignInViewModel> logger, 
+        INavigationService navigationService)
     {
         _signInService = signInService;
+        _dialogService = dialogService;
+        _logger = logger;
+        _navigationService = navigationService;
     }
 
     [ObservableProperty]
@@ -18,48 +32,42 @@ public partial class SignInViewModel : ObservableObject
     [ObservableProperty]
     private string password;
 
-    [ObservableProperty]
-    private bool isBusy;
-
     [RelayCommand]
     private async Task SignInAsync()
     {
         if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Usuario y contraseña son requeridos", "OK");
+            await _dialogService.ShowAlertAsync("Error", "Usuario y contraseña son requeridos", "OK");
             return;
         }
 
-        IsBusy = true;
-
-        try
+        await ExecuteBusyActionAsync(async () =>
         {
-            var request = new SignInRequest
+            try
             {
-                Username = Username,
-                Password = Password
-            };
+                var request = new SignInRequest { Username = Username, Password = Password };
+                var response = await _signInService.SignInAsync(request);
 
-            var response = await _signInService.SignInAsync(request);
-
-            if (response?.Token != null)
-            {
-                await Shell.Current.GoToAsync("//HomePage");
+                if (!string.IsNullOrEmpty(response?.Token))
+                {
+                    await _navigationService.GoToAsync("//HomePage");
+                }
+                else
+                {
+                    await _dialogService.ShowAlertAsync("Acceso denegado", "Credenciales incorrectas", "OK");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await Application.Current!.MainPage!.DisplayAlert("Acceso denegado", "Credenciales incorrectas", "OK");
+                _logger.LogError(ex, "Sign-in error");
+                await _dialogService.ShowAlertAsync("Error", "An unexpected error occurred during sign in. Please try again.", "OK");
             }
-        }
-        finally
-        {
-            IsBusy = false;
-        }
+        });
     }
     
     [RelayCommand]
     private async Task GoToSignUpAsync()
     {
-        await Shell.Current.GoToAsync("SignUpPage");
+        await _navigationService.GoToAsync("SignUpPage");
     }
 }

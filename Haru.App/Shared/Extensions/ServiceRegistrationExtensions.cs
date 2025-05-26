@@ -16,6 +16,10 @@ public static class ServiceRegistrationExtensions
         builder.Services.AddSingleton<SplashViewModel>();
         builder.Services.AddTransient<SignInViewModel>();
         builder.Services.AddTransient<SignUpViewModel>();
+
+        // Register Pages
+        builder.Services.AddTransient<SplashPage>();
+
         builder.Services.AddSingleton<IDialogService, DialogService>();
         builder.Services.AddSingleton<INavigationService, NavigationService>();
         

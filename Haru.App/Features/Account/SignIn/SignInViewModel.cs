@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Haru.App.Shared.Services;
 using Haru.App.Shared.ViewModels;

@@ -1,12 +1,10 @@
-using Microsoft.Maui.Controls;
+namespace Haru.App.Features.Home;
 
-namespace Haru.App.Features.Home
+public partial class HomePage : ContentPage
 {
-    public partial class HomePage : ContentPage
+    public HomePage(HomePageViewModel viewModel)
     {
-        public HomePage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        BindingContext = viewModel;
     }
 }

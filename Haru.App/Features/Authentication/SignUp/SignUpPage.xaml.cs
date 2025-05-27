@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.DependencyInjection;
 
-namespace Haru.App.Features.Account.SignUp;
+namespace Haru.App.Features.Authentication.SignUp; // Updated namespace
 
 public partial class SignUpPage : ContentPage
 {

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Haru.App.Features.Authentication.SignIn.SignInPage"
+             xmlns:vm="clr-namespace:Haru.App.Features.Authentication.SignIn"
+             x:DataType="vm:SignInViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FFF0E1">
+    <ScrollView VerticalOptions="Center">
+        <VerticalStackLayout Spacing="15" Padding="20" VerticalOptions="Center">
+
+            <Image Source="shiba_logo_placeholder.png" HeightRequest="120" Aspect="AspectFit" Margin="0,0,0,30" />
+
+            <Label Text="Welcome Back!" FontSize="Header" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#D2691E" />
+            <Label Text="Sign in to continue" FontSize="Subtitle" HorizontalOptions="Center" Margin="0,0,0,30" TextColor="Gray"/>
+
+            <Border StrokeShape="RoundRectangle 25" StrokeThickness="1" Stroke="LightGray" Padding="15,0" Margin="30,5">
+                <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                    <Label Text="👤" FontSize="Large" VerticalOptions="Center" Margin="0,0,10,0" TextColor="#D2691E"/>
+                    <Entry Grid.Column="1" Placeholder="Username" Text="{Binding Username}" VerticalOptions="Center" Keyboard="Email"/>
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 25" StrokeThickness="1" Stroke="LightGray" Padding="15,0" Margin="30,5">
+                <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                    <Label Text="🔑" FontSize="Large" VerticalOptions="Center" Margin="0,0,10,0" TextColor="#D2691E"/>
+                    <Entry Grid.Column="1" Placeholder="Password" Text="{Binding Password}" IsPassword="True" VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+            
+            <!-- The IsEnabled for the button is now bound to IsNotBusy from BaseViewModel -->
+            <Button Text="Sign In" Command="{Binding SignInCommand}" IsEnabled="{Binding IsNotBusy}" BackgroundColor="#FF7F50" TextColor="White" CornerRadius="25" HeightRequest="50" Margin="30,20" FontAttributes="Bold"/>
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Forgot Password?" Command="{Binding GoToForgotPasswordCommand}" TextColor="#4A90E2" BackgroundColor="Transparent" FontSize="Small"/>
+                <Label Text="|" VerticalOptions="Center" TextColor="LightGray"/>
+                <Button Text="Sign Up" Command="{Binding GoToSignUpCommand}" TextColor="#4A90E2" BackgroundColor="Transparent" FontSize="Small"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

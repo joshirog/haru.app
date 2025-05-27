@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Haru.App.Features.Authentication.TwoFactorAuth.TwoFactorAuthPage"
+             xmlns:vm="clr-namespace:Haru.App.Features.Authentication.TwoFactorAuth"
+             x:DataType="vm:TwoFactorAuthViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FFF0E1">
+    <ScrollView VerticalOptions="Center">
+        <VerticalStackLayout Spacing="15" Padding="20" VerticalOptions="Center">
+
+            <Image Source="shiba_logo_placeholder.png" HeightRequest="100" Aspect="AspectFit" Margin="0,20,0,20" />
+
+            <Label Text="Two-Factor Authentication" FontSize="Header" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#D2691E" />
+            <Label Text="{Binding UserId, StringFormat='Enter the code from your authenticator app for user: {0}'}" 
+                   IsVisible="{Binding HasUserId}"
+                   FontSize="Small" HorizontalOptions="Center" TextColor="Gray" Margin="30,0,30,10" HorizontalTextAlignment="Center"/>
+            <Label Text="This helps keep your account secure." 
+                   FontSize="Body" HorizontalOptions="Center" TextColor="DarkSlateGray" Margin="30,0,30,20" HorizontalTextAlignment="Center"/>
+
+            <Border StrokeShape="RoundRectangle 25" StrokeThickness="1" Stroke="LightGray" Padding="15,0" Margin="30,5" HorizontalOptions="Fill">
+                <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                    <Label Text="📱" FontSize="Large" VerticalOptions="Center" Margin="0,0,10,0" TextColor="#D2691E"/>
+                    <Entry Grid.Column="1" Placeholder="6-digit Code" Text="{Binding TwoFactorCode}" Keyboard="Numeric" MaxLength="6" VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+            
+            <Button Text="Verify Code" Command="{Binding VerifyCodeCommand}" IsEnabled="{Binding IsNotBusy}" 
+                    BackgroundColor="#FF7F50" TextColor="White" CornerRadius="25" HeightRequest="50" Margin="30,20" FontAttributes="Bold"/>
+            
+            <Button Text="Cancel (Back to Sign In)" Command="{Binding GoToSignInCommand}" 
+                    TextColor="Gray" BackgroundColor="Transparent" FontSize="Small" HorizontalOptions="Center" Margin="0,10,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

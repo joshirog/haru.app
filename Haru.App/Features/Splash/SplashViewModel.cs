@@ -24,7 +24,7 @@ public partial class SplashViewModel : ObservableObject
 
             Application.Current.MainPage = new AppShell();
             
-            await Task.Delay(500); // esperar que Shell se inicialice
+            await Task.Yield(); // esperar que Shell se inicialice
             
             var isAuthenticated = await SimulateAuthCheck();
             

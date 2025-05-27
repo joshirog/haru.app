@@ -36,7 +36,7 @@ public partial class SignUpViewModel : BaseViewModel
     [ObservableProperty] private string password;
     [ObservableProperty] private string confirmPassword;
 
-    [RelayCommand(Name = "SignUpCommand")] // Explicitly named the command
+    [RelayCommand] // Explicitly named the command
     private async Task SignUpAsync() 
     {
         if (string.IsNullOrWhiteSpace(Email) ||

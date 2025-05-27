@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Haru.App.Features.UserProfile.ProfilePage"
+             xmlns:vm="clr-namespace:Haru.App.Features.UserProfile"
+             x:DataType="vm:ProfileViewModel"
+             Title="My Profile"
+             BackgroundColor="#FFF0E1">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+
+            <Frame CornerRadius="75" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center" Margin="0,20,0,10" Padding="0" IsClippedToBounds="True" BorderColor="LightGray">
+                <Image Source="{Binding UserProfile.ProfileImageUrl, FallbackValue='shiba_profile_placeholder.png'}" Aspect="AspectFill" HeightRequest="150" WidthRequest="150"/>
+            </Frame>
+            
+            <ActivityIndicator IsRunning="{Binding IsLoadingProfile}" IsVisible="{Binding IsLoadingProfile}" HorizontalOptions="Center" Margin="0,10,0,10"/>
+
+            <VerticalStackLayout IsVisible="{Binding IsProfileLoadedAndNotNull}" Spacing="10">
+                <Label Text="{Binding UserProfile.FullName, FallbackValue='User Full Name'}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5"/>
+                <Label Text="{Binding UserProfile.Username, StringFormat='@{0}', FallbackValue='@username'}" FontSize="Medium" HorizontalOptions="Center" TextColor="Gray" Margin="0,0,0,20"/>
+
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" Padding="15" Margin="10,5">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Email" FontSize="Caption" TextColor="Gray"/>
+                        <Label Text="{Binding UserProfile.Email, FallbackValue='user@example.com'}" FontSize="Body" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" Padding="15" Margin="10,5">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Date of Birth" FontSize="Caption" TextColor="Gray"/>
+                        <Label Text="{Binding UserProfile.DateOfBirth, StringFormat='{0:MMMM dd, yyyy}', FallbackValue='Not set'}" FontSize="Body" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+            
+            <Button Text="Logout" Command="{Binding LogoutCommand}" IsEnabled="{Binding IsNotBusy}" 
+                    BackgroundColor="IndianRed" TextColor="White" CornerRadius="25" HeightRequest="50" Margin="10,30" FontAttributes="Bold" HorizontalOptions="Fill"/>
+                    
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

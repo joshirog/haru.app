@@ -4,9 +4,9 @@ namespace Haru.App.Features.Splash;
 
 public partial class SplashPage : ContentPage
 {
-    public SplashPage()
+    public SplashPage(SplashViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = new SplashViewModel(Application.Current.Dispatcher);
+        BindingContext = viewModel;
     }
 }

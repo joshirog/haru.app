@@ -4,11 +4,11 @@ namespace Haru.App;
 
 public partial class App : Application
 {
-    public App()
+    public App(SplashPage splashPage)
     {
         InitializeComponent();
 
-        MainPage = new SplashPage();
+        MainPage = splashPage;
         
         //Shell.Current.GoToAsync(nameof(SplashPage));
     }

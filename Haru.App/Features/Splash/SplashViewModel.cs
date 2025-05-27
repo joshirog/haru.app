@@ -1,4 +1,4 @@
-using Haru.App.Features.Account.SignIn;
+using Haru.App.Shared.Services;
 
 namespace Haru.App.Features.Splash;
 
@@ -7,10 +7,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 public partial class SplashViewModel : ObservableObject
 {
     private readonly IDispatcher _dispatcher;
+    private readonly INavigationService _navigationService;
 
-    public SplashViewModel(IDispatcher dispatcher)
+    public SplashViewModel(IDispatcher dispatcher, INavigationService navigationService)
     {
         _dispatcher = dispatcher;
+        _navigationService = navigationService;
         Start();
     }
 
@@ -27,9 +29,9 @@ public partial class SplashViewModel : ObservableObject
             var isAuthenticated = await SimulateAuthCheck();
             
             if (isAuthenticated)
-                await Shell.Current?.GoToAsync("SignUpPage");
+                await _navigationService.GoToAsync("//HomePage");
             else
-                await Shell.Current?.GoToAsync("SignInPage");
+                await _navigationService.GoToAsync("SignInPage");
         });
     }
 

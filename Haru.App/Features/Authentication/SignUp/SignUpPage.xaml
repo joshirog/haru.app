@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Haru.App.Features.Authentication.SignUp.SignUpPage"
+             xmlns:vm="clr-namespace:Haru.App.Features.Authentication.SignUp"
+             x:DataType="vm:SignUpViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FFF0E1">
+    <ScrollView VerticalOptions="Center">
+        <VerticalStackLayout Spacing="10" Padding="20" VerticalOptions="Center">
+
+            <Image Source="shiba_logo_placeholder.png" HeightRequest="100" Aspect="AspectFit" Margin="0,20,0,20" />
+
+            <Label Text="Create Your Account" FontSize="Header" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#D2691E" />
+            <Label Text="Let's get you started!" FontSize="Subtitle" HorizontalOptions="Center" Margin="0,0,0,20" TextColor="Gray"/>
+
+            <Border StrokeShape="RoundRectangle 25" StrokeThickness="1" Stroke="LightGray" Padding="15,0" Margin="30,5">
+                <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                    <Label Text="📧" FontSize="Large" VerticalOptions="Center" Margin="0,0,10,0" TextColor="#D2691E"/>
+                    <Entry Grid.Column="1" Placeholder="Email" Text="{Binding Email}" Keyboard="Email" VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 25" StrokeThickness="1" Stroke="LightGray" Padding="15,0" Margin="30,5">
+                <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                    <Label Text="📱" FontSize="Large" VerticalOptions="Center" Margin="0,0,10,0" TextColor="#D2691E"/>
+                    <Entry Grid.Column="1" Placeholder="Phone (Optional)" Text="{Binding Phone}" Keyboard="Telephone" VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 25" StrokeThickness="1" Stroke="LightGray" Padding="15,0" Margin="30,5">
+                <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                    <Label Text="🔑" FontSize="Large" VerticalOptions="Center" Margin="0,0,10,0" TextColor="#D2691E"/>
+                    <Entry Grid.Column="1" Placeholder="Password" Text="{Binding Password}" IsPassword="True" VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 25" StrokeThickness="1" Stroke="LightGray" Padding="15,0" Margin="30,5">
+                <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                    <Label Text="🔑" FontSize="Large" VerticalOptions="Center" Margin="0,0,10,0" TextColor="#D2691E"/>
+                    <Entry Grid.Column="1" Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+            
+            <Button Text="Sign Up" Command="{Binding SignUpCommand}" IsEnabled="{Binding IsNotBusy}" BackgroundColor="#FF7F50" TextColor="White" CornerRadius="25" HeightRequest="50" Margin="30,20" FontAttributes="Bold"/>
+
+            <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                <Label Text="Already have an account?" VerticalOptions="Center" TextColor="Gray"/>
+                <Button Text="Sign In" Command="{Binding GoToSignInCommand}" TextColor="#4A90E2" BackgroundColor="Transparent" FontSize="Small" Padding="5,0"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
